@@ -9,7 +9,7 @@ function EmployeeDashboard() {
   const [currentTicket, setCurrentTicket] = useState(null);
   const [tickets, setTickets] = useState([]);
   const [user, setUser] = useState(null);
-  const [counter, setCounter] = useState(1); 
+  const [counter] = useState(1); 
   const navigate = useNavigate();
 
   useEffect(() => {
