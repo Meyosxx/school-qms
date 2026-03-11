@@ -1,0 +1,244 @@
+/* Display.css */
+.display-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #0d1b2a;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    overflow: hidden;
+}
+
+/* --- HEADER SECTION --- */
+.display-header {
+    height: 28vh; 
+    background-color: #1b263b;
+    border-bottom: 5px solid #f1c40f;
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+
+.header-box {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255,255,255,0.05); 
+    border-radius: 10px;
+}
+
+.header-video {
+    flex: 1.3; 
+    padding: 0 20px;
+    
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+    background-color: transparent; 
+}
+
+.display-footer {
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+}
+
+.footer-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: white;
+    font-size: 0.95rem;
+}
+
+.footer-logo img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+}
+
+.footer-logo-placeholder {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
+.footer-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.header-video video {
+    width: 100%;
+    height: 100%;
+        max-height: 220px; 
+    
+    object-fit: contain;
+    background-color: transparent; 
+    border-radius: 15px;
+    filter: drop-shadow(0 8px 15px rgba(0,0,0,0.4)); 
+}
+
+/* --- MARQUEE --- */
+.display-marquee {
+    height: 3vh; 
+    min-height: 28px;
+    background-color: #f1c40f;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.marquee-track {
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%;
+    animation: marqueeScroll 18s linear infinite;
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+@keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+/* --- MAIN GRID SECTION --- */
+.display-body {
+    flex: 1; /* Takes up remaining 70% */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.windows-grid {
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+    gap: 15px;
+    width: 100%;
+    max-width: 1800px; 
+}
+
+.window-card {
+    background-color: #415a77;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    border-top: 8px solid #2ecc71;
+    text-align: center;
+}
+
+.window-title {
+    font-size: 2.5rem;
+    color: #e0e1dd;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.window-ticket {
+    font-size: 6rem;
+    font-weight: bold;
+    color: #f1c40f;
+    margin: 10px 0 0 0;
+    line-height: 1;
+    text-shadow: 0 0 15px rgba(241, 196, 15, 0.3);
+}
+
+@media (max-width: 1024px) {
+    .display-header {
+        height: auto;
+        flex-direction: column;
+        padding: 16px;
+    }
+
+    .header-video {
+        padding: 0;
+    }
+
+    .header-video video {
+        max-height: 200px;
+    }
+
+    .display-body {
+        padding: 20px;
+    }
+
+    .windows-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .display-header {
+        gap: 12px;
+    }
+
+    .header-box h1 {
+        font-size: 2.6rem !important;
+    }
+
+    .header-box h3 {
+        font-size: 1rem !important;
+        letter-spacing: 1px !important;
+    }
+
+    .display-marquee {
+        min-height: 24px;
+    }
+
+    .marquee-track {
+        font-size: 0.75rem;
+    }
+
+    .display-footer {
+        padding: 10px 16px;
+    }
+
+    .footer-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        font-size: 0.85rem;
+    }
+
+    .footer-logo img,
+    .footer-logo-placeholder {
+        width: 52px;
+        height: 52px;
+    }
+
+    .window-card {
+        padding: 20px;
+    }
+
+    .window-ticket {
+        font-size: 3.5rem;
+    }
+
+    .window-title {
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+    }
+}
