@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { apiUrl, uploadUrl } from '../api';
 import './Kiosk.css';
 
 function Kiosk() {
@@ -18,12 +19,12 @@ function Kiosk() {
 
   useEffect(() => {
     // Fetch Services
-    axios.get('http://localhost:5001/api/services')
+    axios.get(apiUrl('/api/services'))
       .then(res => setServices(res.data))
       .catch(err => console.error(err));
 
     // NEW: Fetch Settings
-    axios.get('http://localhost:5001/api/settings')
+    axios.get(apiUrl('/api/settings'))
       .then(res => {
         if (res.data) setSettings(res.data);
       })
@@ -35,7 +36,7 @@ function Kiosk() {
     if (!selectedService) return alert("Please select a service");
 
     try {
-      const res = await axios.post('http://localhost:5001/api/tickets', { 
+      const res = await axios.post(apiUrl('/api/tickets'), { 
         studentName, serviceType: selectedService 
       });
       
@@ -120,7 +121,7 @@ return (
             <div className="video-wrapper">
               <video key={settings.video_path} autoPlay muted loop playsInline className="video-player">
                 <source 
-                  src={settings.video_path ? `http://localhost:5001/uploads/${settings.video_path}` : `${process.env.PUBLIC_URL}/school-video.mp4`} 
+                  src={settings.video_path ? uploadUrl(settings.video_path) : `${process.env.PUBLIC_URL}/ELECTRON.mp4`} 
                   type="video/mp4" 
                 />
               </video>
@@ -135,7 +136,7 @@ return (
         <div className="receipt-container">
           {settings.logo_path && (
             <img 
-              src={`http://localhost:5001/uploads/${settings.logo_path}`} 
+              src={uploadUrl(settings.logo_path)} 
               alt="Logo" 
               style={{ maxWidth: '100px', marginBottom: '10px', filter: 'grayscale(100%)' }} 
             />

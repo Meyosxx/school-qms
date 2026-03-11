@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaUserAlt, FaBuilding, FaSignOutAlt, FaBullhorn, FaTicketAlt } from 'react-icons/fa';
 import axios from 'axios';
+import { apiUrl } from '../api';
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
 import './EmployeeDashboard.css';
@@ -37,14 +38,14 @@ function EmployeeDashboard() {
 
   const fetchDepartmentTickets = async (dept) => {
     try {
-      const res = await axios.get(`http://localhost:5001/api/tickets?dept=${dept}`);
+      const res = await axios.get(apiUrl(`/api/tickets?dept=${dept}`));
       setTickets(res.data);
     } catch (err) { console.error(err); }
   };
 
   const handleCallNext = async () => {
   try {
-    const res = await axios.put('http://localhost:5001/api/tickets/call-next', { 
+    const res = await axios.put(apiUrl('/api/tickets/call-next'), { 
       counter: counter,
       dept: user.service_type 
     });
@@ -70,7 +71,7 @@ function EmployeeDashboard() {
   const handleComplete = async () => {
   if (!currentTicket) return;
   try {
-    await axios.put(`http://localhost:5001/api/tickets/complete/${currentTicket.id}`);
+    await axios.put(apiUrl(`/api/tickets/complete/${currentTicket.id}`));
     setCurrentTicket(null); // Clear the current ticket from the screen
     alert("Transaction finished!");
   } catch (err) {

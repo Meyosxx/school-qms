@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { apiUrl, uploadUrl } from '../api';
 import { useNavigate } from 'react-router-dom';
 import { FaUser, FaLock, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import './Login.css';
@@ -19,12 +20,12 @@ function Login() {
 
   useEffect(() => {
     // 1. Fetch System Settings (Colors & Logo)
-    axios.get('http://localhost:5001/api/settings')
+    axios.get(apiUrl('/api/settings'))
       .then(res => setSettings(res.data))
       .catch(err => console.error(err));
 
     // 2. Fetch Carousel Images
-    axios.get('http://localhost:5001/api/settings/carousel')
+    axios.get(apiUrl('/api/settings/carousel'))
       .then(res => setCarouselImages(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -44,7 +45,7 @@ function Login() {
     e.preventDefault();
     setError(''); 
     try {
-      const res = await axios.post('http://localhost:5001/api/auth/login', { username, password });
+      const res = await axios.post(apiUrl('/api/auth/login'), { username, password });
       localStorage.setItem('token', res.data.token); 
       setIsSwapping(true);
       setTimeout(() => {
@@ -83,7 +84,7 @@ function Login() {
               {carouselImages.map((img, index) => (
                 <div key={img.id} className={`carousel-slide ${index === currentSlide ? 'active' : ''}`}>
                   <img 
-                    src={`http://localhost:5001/uploads/${img.image_path}`} 
+                    src={uploadUrl(img.image_path)} 
                     alt={`Slide ${index}`} 
                     className="carousel-image"
                   />
@@ -133,7 +134,7 @@ function Login() {
         <div className="login-card">
           
           {settings?.logo_path ? (
-            <img src={`http://localhost:5001/uploads/${settings.logo_path}`} alt="School Logo" className="login-logo" />
+            <img src={uploadUrl(settings.logo_path)} alt="School Logo" className="login-logo" />
           ) : (
             <h2 style={{ color: '#2c3e50', margin: '0 0 20px 0' }}>Staff Portal</h2>
           )}
